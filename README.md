@@ -1,7 +1,8 @@
 # API Load Test — Baseline Scenario
 
 **Tool:** k6 · JavaScript  
-**Author:** [Perfwright](https://perfwright.com)
+**Author:** [Perfwright](https://perfwright.com)  
+**Live report:** [perfwright.github.io/k6-api-load-test](https://perfwright.github.io/k6-api-load-test/)
 
 Parameterized user journey with thresholds, custom metrics, and staged ramp-up. Ready to run against any REST API.
 

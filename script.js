@@ -166,6 +166,6 @@ export function handleSummary(data) {
 
   return {
     "stdout": JSON.stringify(data, null, 2),
-    "index.html": htmlReport(data),
+    "index.html": htmlReport(data).replace("Ben Coleman", "Perfwright"),
   };
 }
