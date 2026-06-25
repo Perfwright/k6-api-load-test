@@ -23,6 +23,7 @@ import http from "k6/http";
 import { check, group, sleep } from "k6";
 import { Counter, Rate, Trend } from "k6/metrics";
 import { randomIntBetween } from "https://jslib.k6.io/k6-utils/1.4.0/index.js";
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 
 // ---------------------------------------------------------------------------
 // Configuration — override via -e / --env flags
@@ -165,5 +166,6 @@ export function handleSummary(data) {
 
   return {
     "stdout": JSON.stringify(data, null, 2),
+    "index.html": htmlReport(data),
   };
 }

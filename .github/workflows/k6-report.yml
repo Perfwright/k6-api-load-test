@@ -1,0 +1,78 @@
+name: k6 Load Test → GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'Target API base URL'
+        required: false
+        default: 'https://httpbin.k6.io/anything'
+      peak_vus:
+        description: 'Peak virtual users'
+        required: false
+        default: '5'
+      ramp_time:
+        description: 'Ramp-up / ramp-down duration (seconds)'
+        required: false
+        default: '15'
+      steady_time:
+        description: 'Steady-state duration (seconds)'
+        required: false
+        default: '30'
+
+# Required for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one Pages deployment at a time; cancel any in-progress run
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  load-test:
+    name: Run k6 & deploy report
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install k6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Run k6 load test
+        # continue-on-error so the report is always deployed,
+        # even when thresholds are not met.
+        continue-on-error: true
+        env:
+          BASE_URL:    ${{ inputs.base_url    || 'https://httpbin.k6.io/anything' }}
+          PEAK_VUS:    ${{ inputs.peak_vus    || '5' }}
+          RAMP_TIME:   ${{ inputs.ramp_time   || '15' }}
+          STEADY_TIME: ${{ inputs.steady_time || '30' }}
+        run: k6 run script.js
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p _site
+          cp index.html _site/index.html
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
