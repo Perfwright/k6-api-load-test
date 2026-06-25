@@ -1,0 +1,174 @@
+# =============================================================================
+# k6 / Load Testing
+# =============================================================================
+# Test result files
+results/
+output/
+reports/
+*.json.gz
+summary.json
+result.json
+
+# k6 output formats
+*.csv
+*.xml
+*.jtl
+
+# Grafana / InfluxDB local data
+grafana-data/
+influxdb-data/
+
+# k6 cloud run artifacts
+k6cloud/
+
+# =============================================================================
+# Environment & Secrets
+# =============================================================================
+.env
+.env.*
+!.env.example
+!.env.sample
+*.local
+secrets.*
+credentials.*
+auth.json
+tokens.json
+
+# =============================================================================
+# Node.js / npm (for projects using k6 bundlers, webpack, esbuild, etc.)
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build output (esbuild / webpack bundles)
+dist/
+build/
+bundle/
+*.bundle.js
+*.bundle.js.map
+
+# =============================================================================
+# Logs
+# =============================================================================
+logs/
+*.log
+*.log.*
+log/
+
+# =============================================================================
+# OS Files
+# =============================================================================
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# Editors & IDEs
+# =============================================================================
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+
+# JetBrains (IntelliJ, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Vim / Neovim
+*.swp
+*.swo
+*.swn
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+Session.vim
+.netrwhist
+tags
+
+# Emacs
+\#*\#
+.\#*
+*.elc
+auto-save-list
+tramp
+
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
+# TextMate
+*.tmproj
+*.tmproject
+tmtags
+
+# =============================================================================
+# CI/CD & Docker
+# =============================================================================
+# Docker
+.dockerignore.local
+docker-compose.override.yml
+docker-compose.local.yml
+
+# GitHub Actions local runner artifacts
+.act/
+
+# =============================================================================
+# Misc
+# =============================================================================
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.patch
+
+# Claude Code internal config
+.claude/
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Dependency vulnerability scan artifacts
+.snyk
